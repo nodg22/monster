@@ -1,4 +1,5 @@
 const ATTACK_VALUE = 10;
+const MONSTER_ATTACK_VAL = 14;
 let chosenmaxLife, currentMonsterhealth, currentPlayerhealth; 
 
 
@@ -8,11 +9,22 @@ currentMonsterhealth = chosenmaxLife;
 currentPlayerhealth = chosenmaxLife;
 
 adjustHealthBars(chosenmaxLife);
+const winCondition = ()=>{
+    if ( currentMonsterhealth <= 0){
+        alert('You Won!');
+    }
+    if(currentPlayerhealth <=0){
+        alert('You Lost!')
+    }
 
+}
 const attackhandler = () => {
-   const damage=  dealMonsterDamage(ATTACK_VALUE);
+   const monsterDamage=  dealMonsterDamage(ATTACK_VALUE);
+   const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VAL);
 
-   currentMonsterhealth -= damage;
+   currentMonsterhealth -= monsterDamage;
+   currentPlayerhealth -= playerDamage;
+   winCondition();
 };
 
 attackBtn.addEventListener('click', attackhandler);
